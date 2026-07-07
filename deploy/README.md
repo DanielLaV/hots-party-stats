@@ -73,3 +73,18 @@ survives container restarts. Writes require the `X-Api-Token` header to
 match `FEARLESS_API_TOKEN` from `.env`; reads don't. This is a shared-secret
 deterrent (the token is visible in the dashboard's page source to anyone who
 opens devtools), not real per-user auth; see `api/auth.py`.
+
+`hots-api` runs as a fixed non-root UID/GID (1000:1000, see `../api/Dockerfile`)
+rather than root, so `deploy/api-data` needs to be writable by that UID. If
+`docker compose up` already created it (owned by root, since that's what
+Docker does for a bind mount source that doesn't exist yet) or you're
+updating an existing deployment, fix its ownership once before/after
+rebuilding `hots-api`:
+```
+mkdir -p api-data
+chown -R 1000:1000 api-data
+docker compose up -d --build hots-api
+```
+Skipping this makes Fearless reads keep working but writes/resets fail
+silently on the backend (the dashboard will show a "Failed to save"/"Failed
+to reset" alert).
