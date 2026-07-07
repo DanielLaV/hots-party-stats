@@ -8,7 +8,10 @@ backend (currently just the Fearless draft tracker: see `../api/`).
   generated dashboard; never needs rebuilding just because the data changed)
   and `hots-api` (the Flask app in `../api/`, built from source).
 - `refresh.sh`: pulls the repo and regenerates the dashboard into the
-  folder `hots-dashboard` serves. Run manually or on a schedule.
+  folder `hots-dashboard` serves. Run manually or on a schedule. Also prints
+  how many new games (broken down by mode) the pull actually brought in.
+- `count_new_games.py`: helper `refresh.sh` calls to compute that new-games
+  count; not meant to be run on its own.
 - `hots.subdomain.conf`: the SWAG reverse-proxy config, routing `/api/` to
   `hots-api` and everything else to `hots-dashboard`, both on the same
   domain (no CORS needed).
