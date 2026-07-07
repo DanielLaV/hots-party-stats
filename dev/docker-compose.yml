@@ -1,0 +1,20 @@
+# Local stand-in for deploy/'s SWAG + docker-compose.yml -- same topology
+# (nginx doing path-based /api/ routing to the Flask API) but on localhost,
+# no TLS/domain/SWAG needed. Never used in production; see dev/run.sh.
+services:
+  hots-api:
+    build: ../api
+    environment:
+      FEARLESS_API_TOKEN: ${FEARLESS_API_TOKEN:-dev-token}
+    volumes:
+      - ./api-data:/data
+
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./www:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - hots-api

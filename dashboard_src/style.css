@@ -1,0 +1,120 @@
+:root {
+  --bg: #0f1420; --panel: #161d2e; --panel2: #1d2436; --border: #2a3348;
+  --text: #e8ecf4; --muted: #93a0bd; --accent: #5b8cff; --good: #3ec97c; --bad: #ef5a6f;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.4 -apple-system, Segoe UI, Roboto, sans-serif; }
+header { padding: 20px 28px; border-bottom: 1px solid var(--border); }
+header h1 { margin: 0 0 4px; font-size: 22px; }
+header p { margin: 0; color: var(--muted); }
+.toprow { display: flex; align-items: center; justify-content: space-between; padding: 14px 28px 0; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 10px; }
+.tabs { display: flex; gap: 8px; }
+.tab { padding: 8px 16px; border-radius: 8px 8px 0 0; cursor: pointer; color: var(--muted); border: 1px solid transparent; }
+.tab.active { background: var(--panel); color: var(--text); border-color: var(--border); border-bottom-color: var(--panel); margin-bottom: -1px; }
+.tab.active:not(.tab-fearless) { box-shadow: inset 0 -3px 0 var(--text); }
+.tab-fearless { margin-left: 10px; border-left: 1px solid var(--border); padding-left: 16px; color: var(--bad); background: rgba(239, 90, 111, 0.1); }
+.tab-fearless:hover { background: rgba(239, 90, 111, 0.18); }
+.tab-fearless.active { background: rgba(239, 90, 111, 0.25); color: var(--bad); border-color: var(--bad); border-bottom-color: rgba(239, 90, 111, 0.25); }
+main { padding: 24px 28px 60px; max-width: 1400px; margin: 0 auto; }
+.cards { display: flex; gap: 14px; margin-bottom: 22px; flex-wrap: wrap; }
+.card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px 20px; min-width: 140px; }
+.card .num { font-size: 26px; font-weight: 700; }
+.card .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+@media (max-width: 1000px) { .grid { grid-template-columns: 1fr; } }
+section.panel { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+section.panel h2 { margin: 0 0 10px; font-size: 15px; }
+section.panel .hint { color: var(--muted); font-size: 12px; margin: -6px 0 10px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+th { color: var(--muted); font-weight: 600; cursor: pointer; user-select: none; position: sticky; top: 0; background: var(--panel); }
+th:hover { color: var(--text); }
+th.sorted::after { content: " \25BE"; }
+tbody tr:hover { background: var(--panel2); }
+.barcell { display: flex; align-items: center; gap: 8px; }
+.barcell .bar { height: 8px; border-radius: 4px; background: var(--border); flex: 1; min-width: 60px; position: relative; overflow: hidden; }
+.barcell .bar > span { display: block; height: 100%; border-radius: 4px; }
+.wr-good { background: var(--good); }
+.wr-bad { background: var(--bad); }
+.scroll { max-height: 420px; overflow: auto; }
+.controls { display: flex; gap: 14px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
+.controls label { color: var(--muted); font-size: 12px; }
+.controls input[type=number] { width: 60px; background: var(--panel2); border: 1px solid var(--border); color: var(--text); border-radius: 6px; padding: 4px 6px; }
+.playerbtns { display: flex; gap: 6px; flex-wrap: wrap; }
+.playerbtn { padding: 6px 12px; border-radius: 20px; border: 1px solid var(--border); background: var(--panel2); color: var(--muted); cursor: pointer; font-size: 12px; }
+.playerbtn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.rolebar { display: flex; height: 22px; border-radius: 6px; overflow: hidden; margin-bottom: 6px; }
+.rolebar span.seg { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: rgba(0,0,0,.65); text-shadow: 0 1px 0 rgba(255,255,255,.25); overflow: hidden; white-space: nowrap; }
+.rolebar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.rolebar-row .name { width: 100px; flex-shrink: 0; font-size: 12px; color: var(--muted); }
+.rolebar-row .rolebar { flex: 1; }
+.legend { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; font-size: 12px; color: var(--muted); }
+.legend .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: middle; }
+.role-Tank { background: #5b8cff; } .role-Bruiser { background: #9b6bff; }
+.role-Ranged-Assassin { background: #ef5a6f; } .role-Melee-Assassin { background: #ff9a4d; }
+.role-Healer { background: #3ec97c; } .role-Support { background: #ecd94e; }
+.subtabs { display: flex; gap: 6px; margin-bottom: 12px; }
+.subtab { padding: 5px 12px; border-radius: 16px; border: 1px solid var(--border); background: var(--panel2); color: var(--muted); cursor: pointer; font-size: 12px; }
+.subtab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.seasonfilter { position: relative; }
+.seasonbtn { padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--panel2); color: var(--text); cursor: pointer; font-size: 13px; }
+.seasonpanel { display: none; position: absolute; right: 0; top: calc(100% + 6px); z-index: 20; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 10px; width: 260px; max-height: 340px; overflow: auto; box-shadow: 0 8px 24px rgba(0,0,0,.4); }
+.seasonpanel.open { display: block; }
+.seasonpanel .quicklinks { display: flex; gap: 10px; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.seasonpanel .quicklinks a { color: var(--accent); font-size: 12px; cursor: pointer; }
+.seasonpanel label { display: flex; align-items: center; gap: 8px; font-size: 13px; padding: 4px 2px; cursor: pointer; }
+.seasonpanel label:hover { color: var(--text); }
+
+.viewtoggle { display: flex; gap: 6px; }
+.viewtoggle button { padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--panel2); color: var(--muted); cursor: pointer; font-size: 13px; }
+.viewtoggle button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.mingamesfilter label { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--panel2); color: var(--text); font-size: 13px; }
+.mingamesfilter input[type=number] { width: 50px; background: var(--panel); border: 1px solid var(--border); color: var(--text); border-radius: 6px; padding: 4px 6px; }
+
+.hots-select { background: var(--panel2); border: 1px solid var(--border); color: var(--text); border-radius: 6px; padding: 6px 10px; font-size: 13px; }
+
+.chart-wrap { width: 100%; overflow-x: auto; }
+.chart-wrap svg { display: block; }
+.chart-tooltip-target:hover { opacity: 0.8; }
+
+.fearless-layout { display: flex; gap: 20px; align-items: flex-start; }
+.fearless-sidebar { flex: 0 0 560px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+.fearless-sidebar-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+.fearless-sidebar-header h2 { margin: 0; font-size: 15px; }
+.fearless-reset-btn { padding: 6px 12px; border-radius: 8px; border: 1px solid var(--bad); background: transparent; color: var(--bad); cursor: pointer; font-size: 12px; }
+.fearless-reset-btn:hover { background: var(--bad); color: #fff; }
+.fearless-hero-groups { margin-top: 10px; display: flex; flex-direction: column; gap: 14px; }
+.fearless-role-header { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
+.fearless-role-count { color: var(--muted); font-weight: 400; }
+.fearless-hero-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.fearless-hero-chip { padding: 4px 10px; border-radius: 14px; background: var(--panel2); border: 1px solid var(--border); font-size: 12px; }
+.role-dot { display: inline-block; width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
+.role-Unknown { background: var(--muted); }
+.fearless-games { flex: 1; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.fearless-teams { display: flex; gap: 24px; flex-wrap: wrap; }
+.fearless-team { flex: 1; min-width: 180px; display: flex; flex-direction: column; gap: 8px; }
+.fearless-team-label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+.fearless-pick { width: 100%; }
+
+@media (max-width: 1000px) {
+  .fearless-layout { flex-direction: column; }
+  .fearless-sidebar { position: static; width: 100%; flex-basis: auto; }
+}
+
+@media (max-width: 640px) {
+  header { padding: 14px 14px; }
+  header h1 { font-size: 18px; }
+  .toprow { padding: 10px 14px 0; gap: 6px; }
+  .tab { padding: 6px 10px; font-size: 13px; }
+  main { padding: 14px 14px 40px; }
+  .card { padding: 10px 14px; min-width: 110px; }
+  .card .num { font-size: 20px; }
+  section.panel { padding: 12px 12px; }
+  table { font-size: 12px; }
+  th, td { padding: 5px 6px; }
+  .rolebar-row .name { width: 70px; font-size: 11px; }
+  .playerbtn, .subtab { padding: 5px 9px; font-size: 11px; }
+  .seasonpanel { width: 220px; }
+}

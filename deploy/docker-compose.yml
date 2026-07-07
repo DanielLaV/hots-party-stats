@@ -1,0 +1,30 @@
+# Serves the generated dashboard.html as a static site. Regenerating the data
+# (see refresh.sh) doesn't require touching this container at all -- it just
+# serves whatever's currently in ./www.
+services:
+  hots-dashboard:
+    image: nginx:alpine
+    container_name: hots-dashboard
+    restart: unless-stopped
+    volumes:
+      - ./www:/usr/share/nginx/html:ro
+    networks:
+      - proxynet # CHANGE ME if your SWAG container is on a different docker network
+
+  # Small Flask API for anything that needs a live, shared, writable backend
+  # -- currently just the Fearless draft tracker (see ../api/). Docker Compose
+  # auto-loads ./.env from this same directory for FEARLESS_API_TOKEN.
+  hots-api:
+    build: ../api
+    container_name: hots-api
+    restart: unless-stopped
+    environment:
+      FEARLESS_API_TOKEN: ${FEARLESS_API_TOKEN:?set this in deploy/.env -- see .env.example}
+    volumes:
+      - ./api-data:/data # persisted state files (fearless_state.json, etc.)
+    networks:
+      - proxynet
+
+networks:
+  proxynet:
+    external: true # must already exist -- this is the same network your SWAG container uses

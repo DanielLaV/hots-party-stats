@@ -1,0 +1,26 @@
+venv/
+__pycache__/
+*.pyc
+*.log
+tmp/
+
+# dashboard.html is generated output (regenerate locally with build_dashboard.py)
+# -- data/ is intentionally NOT ignored, since we're committing it as a shared
+# baseline dataset for the group (see README's "Sharing data with your team").
+dashboard.html
+
+# Local Claude Code config -- excluded entirely so personal settings (e.g.
+# permission bypass mode) never get committed and silently inherited by
+# whoever else opens this project.
+.claude/
+
+# Machine-specific paths for deploy/refresh.sh -- see deploy/README.md.
+deploy/refresh.local.sh
+
+# Fearless API's shared secret + its persisted state file -- see deploy/README.md.
+deploy/.env
+deploy/api-data/
+
+# dev/run.sh's generated local test rig -- see README's "Running it locally".
+dev/www/
+dev/api-data/
