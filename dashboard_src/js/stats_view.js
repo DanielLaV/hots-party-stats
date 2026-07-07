@@ -119,6 +119,7 @@ function renderStatsView() {
     <section class="panel" style="margin-bottom:24px">
       <h2>Our best comp against a given enemy comp</h2>
       <div class="hint">Pick an enemy comp to see which of our comps have fared best against it specifically.</div>
+      <div class="hint">T=Tank B=Bruiser RA=Ranged Assassin MA=Melee Assassin H=Healer Su=Support</div>
       <select class="hots-select" id="enemyCompPicker"></select>
       <div class="scroll" id="tbl-bestvsenemycomp" style="margin-top:10px"></div>
     </section>
