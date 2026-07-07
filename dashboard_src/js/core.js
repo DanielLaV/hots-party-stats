@@ -182,23 +182,31 @@ function renderSeasonFilter() {
   document.addEventListener("click", (e) => {
     if (!panel.contains(e.target) && e.target !== btn) panel.classList.remove("open");
   });
-  panel.querySelectorAll('input[type=checkbox]').forEach(cb => cb.onchange = () => {
+  const checkboxes = panel.querySelectorAll('input[type=checkbox]');
+  checkboxes.forEach(cb => cb.onchange = () => {
     const s = cb.dataset.season;
     if (cb.checked) selectedSeasons.add(s); else selectedSeasons.delete(s);
     btn.textContent = `Seasons: ${seasonButtonLabel()} ▾`;
     render();
   });
+  // "All"/"None" used to call renderSeasonFilter() again to redraw the
+  // checkboxes, but that replaces #seasonPanel with a new DOM node --
+  // the click event's bubble-to-document phase (for the click-outside-
+  // closes-it listener below) then sees e.target as the old, now-detached
+  // <a>, which reads as "outside" the new panel and immediately closes it.
+  // Toggling the existing checkboxes in place avoids all of that, and
+  // matches the checkbox onchange handler above (no full re-render there
+  // either).
   document.getElementById("seasonAll").onclick = () => {
     selectedSeasons = new Set(DATA.seasons);
-    renderSeasonFilter();
-    panel.classList.add("open");
-    document.getElementById("seasonPanel").classList.add("open");
+    checkboxes.forEach(cb => cb.checked = true);
+    btn.textContent = `Seasons: ${seasonButtonLabel()} ▾`;
     render();
   };
   document.getElementById("seasonNone").onclick = () => {
     selectedSeasons = new Set();
-    renderSeasonFilter();
-    document.getElementById("seasonPanel").classList.add("open");
+    checkboxes.forEach(cb => cb.checked = false);
+    btn.textContent = `Seasons: ${seasonButtonLabel()} ▾`;
     render();
   };
 }
